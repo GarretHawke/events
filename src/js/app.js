@@ -1,6 +1,14 @@
-let holes = document.querySelectorAll('.hole');
+const main = document.querySelector('main');
+const holes = document.querySelectorAll('.hole');
+const wrapper = document.querySelector('.layout-4-column');
 let lastHole;
-const TIME = 1500;
+const appearingTime = 1000;
+
+let score = 0;
+let loserScore = 0;
+let deadCount = document.querySelector('.dead');
+let survivedCount = document.querySelector('.survived');
+
 
 const addActiveHole = () => {
   const randomIndex = Math.floor(Math.random() * holes.length);
@@ -25,6 +33,33 @@ const changeActiveHole = () => {
 
 addActiveHole();
 
-setInterval(() => {
-  changeActiveHole();
-}, TIME);
+const setTime = setInterval(() => {
+  setTimeout(changeActiveHole(), appearingTime)
+}, appearingTime);
+
+const countingScore = () => ++score;
+const countingLoserScore = () => ++loserScore;
+
+const endGame = () => {
+  wrapper.classList.add('invisible');
+  main.classList.add('lose');
+  clearInterval(setTime);
+}
+
+main.addEventListener('mousedown', () => {
+  survivedCount.innerHTML = countingLoserScore();
+  if (loserScore >= 5) {
+    endGame();
+  }
+});
+
+holes.forEach(hole => {
+  hole.addEventListener('mousedown', (event) => {
+    event.stopPropagation();
+    if (hole.classList.contains('hole_has-devil')) {
+      deadCount.innerHTML = countingScore();
+      changeActiveHole();
+      setTime;
+    }
+  });
+});

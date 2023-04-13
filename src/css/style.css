@@ -46,6 +46,10 @@ select {
   font: inherit;
 }
 
+* {
+  cursor: url('../../public/hammer.png'), auto;
+}
+
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   align-items: center;
@@ -64,7 +68,24 @@ main {
 .wrapper {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   max-width: 1200px;
+}
+
+.layout-1-column {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 60px;
+}
+
+.layout-1-column > * {
+  flex-basis: 100%;
+  padding-left: 70px;
+}
+
+.wrapper__text {
+  font-size: 32px;
+  font-weight: 700;
 }
 
 .layout-4-column {
@@ -97,7 +118,6 @@ main {
   height: 150px;
   background: gray;
   border-radius: 50%;
-  cursor: pointer;
 }
 
 .hole_has-devil {
@@ -107,4 +127,18 @@ main {
   background-size: contain;
   background-color: brown;
 }
+
+.invisible {
+  visibility: hidden;
+}
+
+.lose {
+  background-image: url('../../public/loser.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 2;
+}
+
+
 
