@@ -28,13 +28,14 @@ const removeActiveHole = () => {
 
 const changeActiveHole = () => {
   removeActiveHole();
-  addActiveHole();
+  setTimeout(addActiveHole(), appearingTime);
+  //addActiveHole();
 }
 
-addActiveHole();
+//addActiveHole();
 
 const setTime = setInterval(() => {
-  setTimeout(changeActiveHole(), appearingTime)
+  changeActiveHole();
 }, appearingTime);
 
 const countingScore = () => ++score;
@@ -58,7 +59,7 @@ holes.forEach(hole => {
     event.stopPropagation();
     if (hole.classList.contains('hole_has-devil')) {
       deadCount.innerHTML = countingScore();
-      changeActiveHole();
+      removeActiveHole();
       setTime;
     }
   });
